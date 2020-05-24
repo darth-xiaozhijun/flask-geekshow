@@ -70,6 +70,17 @@ def template_user_list():
     return render_template("user_list.html", users=users)
 
 
+# 模板：继承
+@app.route("/templates/base/one")
+def template_base_one():
+    return render_template(("base_one.html"))
+
+
+@app.route("/templates/base/two")
+def template_base_two():
+    return render_template(("base_two.html"))
+
+
 if __name__ == "__main__":
     app.debug = True  # 设置调试模式，生产模式的时候要关掉debug
     app.run()
