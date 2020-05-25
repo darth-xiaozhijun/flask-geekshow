@@ -1,4 +1,4 @@
-from flask import Flask, request, url_for, render_template, flash
+from flask import Flask, request, url_for, render_template, flash, abort
 from models import User
 
 app = Flask(__name__)
@@ -115,6 +115,20 @@ def login():
 @app.route("/login")
 def login_html():
     return render_template("login.html")
+
+
+# 错误页面
+@app.errorhandler(404)
+def not_found(e):
+    return render_template("404.html")
+
+
+@app.route('/users/<user_id>')
+def users(user_id):
+    if int(user_id) == 1:
+        return render_template("user.html")
+    else:
+        abort(404)
 
 
 if __name__ == "__main__":
