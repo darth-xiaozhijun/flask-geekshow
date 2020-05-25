@@ -1,11 +1,12 @@
-from flask import Flask, request, url_for, render_template
+from flask import Flask, request, url_for, render_template, flash
 from models import User
 
 app = Flask(__name__)
+app.secret_key = "123"
 
 
 # GET 请求
-@app.route("/")
+@app.route("/hello")
 def index():
     return "<h1>Hello World</h1>"
 
@@ -79,6 +80,41 @@ def template_base_one():
 @app.route("/templates/base/two")
 def template_base_two():
     return render_template(("base_two.html"))
+
+
+# 消息提示
+@app.route("/msg")
+def hello_world():
+    flash("hello geekshow")
+    return render_template("msg.html")
+
+
+# 用户登录
+@app.route('/login', methods=['POST'])
+def login():
+    form = request.form
+    username = form.get('username')
+    password = form.get('password')
+
+    if not username:
+        flash("please input username")
+        return render_template("login.html")
+    if not password:
+        flash("please input password")
+        return render_template("login.html")
+
+    if username == 'geekshow' and password == '123456':
+        flash("login success")
+        return render_template("login.html")
+    else:
+        flash("username or password is wrong")
+        return render_template("login.html")
+
+
+# 返回前端页面
+@app.route("/login")
+def login_html():
+    return render_template("login.html")
 
 
 if __name__ == "__main__":
