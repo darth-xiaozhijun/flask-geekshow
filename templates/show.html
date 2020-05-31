@@ -1,0 +1,19 @@
+<html>
+	<head>
+		</head>
+		<body>
+			<form method ="post">
+				message: {{form.message}}
+                <br>
+				sender: {{form.sender}}
+                <br>
+				<input type='Submit' value="Submit">
+				<input type ='reset' value="Reset">
+			</form>
+			<ul>
+			{%for each in entries%}
+			<li> {{each.message}} Send by {{each.sender}}
+			{%endfor%}
+		</ul>
+		</body>
+</html>
