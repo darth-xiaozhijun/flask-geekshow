@@ -5,6 +5,8 @@ conn = pymysql.connect("localhost", "root", "123456", "python")
 # 创建游标
 cursor = conn.cursor()
 
+# 安装模块
+# python -m pip install -i https://mirrors.aliyun.com/pypi/simple/ pymysql
 
 def insert(username, password):
     insert_sql = "insert into T_USER(username,password) values ('{0}','{1}')".format(username, password)
