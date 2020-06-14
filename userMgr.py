@@ -1,8 +1,11 @@
 from flask import Flask, render_template, url_for, request, redirect
 from wtforms import Form, TextField, PasswordField, validators
 from orm import User
+from user import *
 
 app = Flask(__name__)
+
+app.register_blueprint(user, url_prefix='/user')
 
 
 class LoginForm(Form):
